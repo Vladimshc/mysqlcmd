@@ -76,10 +76,14 @@ public class MainController {
 
     private void doHelp() {
         view.write("Command for wright:");
-        view.write("list - for print list of oll tables on base there we connected");
-        view.write("help - for print help list on screen ");
-        view.write("exit - for exit from program ");
-        view.write("find|tableName - for print the contents of the table 'tableName' ");
+        view.write("\t list " +
+                "\n\t\t - for print list of oll tables on base there we connected");
+        view.write("\t help " +
+                "\n\t\t - for print help list on screen ");
+        view.write("\t exit " +
+                "\n\t\t - for exit from program ");
+        view.write("\t find|tableName " +
+                "\n\t\t - for print the contents of the table 'tableName' ");
 
     }
 
