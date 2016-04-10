@@ -15,7 +15,7 @@ public class JDBCDatabaseManagerTest extends DatabaseManagerTest {
 
     @Override
     public void testGetAllTableNames() {
-        String[] tableNemes = manager.getTableNemes();
+        String[] tableNemes = manager.getTableNames();
         assertEquals("[user2, user]", Arrays.toString(tableNemes));
     }
 }

@@ -13,12 +13,13 @@ import static org.junit.Assert.assertEquals;
 public abstract class DatabaseManagerTest {
 
     protected DatabaseManager manager;
+
     public abstract DatabaseManager getDatabaseManager();
 
     @Before
-    public  void setup(){
+    public void setup() {
         manager = getDatabaseManager();
-        manager.connect( "mysqlcmd","postgres", "12345");
+        manager.connect("mysqlcmd", "postgres", "12345");
     }
 
 
@@ -26,7 +27,7 @@ public abstract class DatabaseManagerTest {
     public abstract void testGetAllTableNames();
 
     @Test
-    public void testGetTableData(){
+    public void testGetTableData() {
         //given
         manager.clear("user");
 
@@ -68,5 +69,17 @@ public abstract class DatabaseManagerTest {
         DataSet user = users[0];
         assertEquals("[name, password, id]", Arrays.toString(user.getNames()));
         assertEquals("[Masha, pass2, 13]", Arrays.toString(user.getValues()));
+    }
+
+    @Test
+    public void testGetColumNames() {
+        //given
+        manager.clear("user");
+
+        //when
+        String[] columNames = manager.getTableColums("user");
+
+        //thern
+        assertEquals("[name, password, id]", Arrays.toString(columNames));
     }
 }

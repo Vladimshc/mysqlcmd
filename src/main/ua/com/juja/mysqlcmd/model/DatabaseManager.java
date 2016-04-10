@@ -6,7 +6,7 @@ package ua.com.juja.mysqlcmd.model;
 public interface DatabaseManager {
     DataSet[] getTableData(String tableName);
 
-    String[] getTableNemes();
+    String[] getTableNames();
 
     void  connect(String database, String userName, String password);
 
@@ -16,4 +16,5 @@ public interface DatabaseManager {
 
     void update(String tableName, int id, DataSet newValue);
 
+    String[] getTableColums(String tableName);
 }

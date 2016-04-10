@@ -46,7 +46,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public String[] getTableNemes() {
+    public String[] getTableNames() {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(
@@ -140,6 +140,30 @@ public class JDBCDatabaseManager implements DatabaseManager {
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String[] getTableColums(String tableName) {
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT * FROM information_schema.columns WHERE " +
+                            "table_schema = 'public'" +
+                            "AND table_name = '" + tableName + "'");
+            String[] tables = new String[100];
+            int index = 0;
+            while (rs.next()) {
+                tables[index++] = rs.getString("column_name");
+            }
+            tables = Arrays.copyOf(tables, index, String[].class);
+            rs.close();
+            stmt.close();
+            return tables;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new String[0];
         }
     }
 

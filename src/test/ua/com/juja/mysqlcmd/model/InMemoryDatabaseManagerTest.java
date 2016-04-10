@@ -15,7 +15,7 @@ public class InMemoryDatabaseManagerTest extends DatabaseManagerTest {
 
     @Override
     public void testGetAllTableNames() {
-        String[] tableNemes = manager.getTableNemes();
+        String[] tableNemes = manager.getTableNames();
         assertEquals("[user]", Arrays.toString(tableNemes));
     }
 }
