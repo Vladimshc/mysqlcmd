@@ -1,22 +1,30 @@
 package ua.com.juja.mysqlcmd.controller;
 
 import ua.com.juja.mysqlcmd.model.DatabaseManager;
-import ua.com.juja.mysqlcmd.model.JDBCDatabaseManager;
-import ua.com.juja.mysqlcmd.view.Console;
 import ua.com.juja.mysqlcmd.view.View;
 
 /**
  * Created by Wallee on 07.04.2016.
  */
 public class MainController {
-    public static void main(String[] args) {
-        View viev = new Console();
-        DatabaseManager manager = new JDBCDatabaseManager();
 
-        viev.write("Привет - Hi, user");
-        viev.write("Write base name and password in format: database|userName|password ");
+    private View view;
+    private DatabaseManager manager;
+
+    public MainController(View view, DatabaseManager manager) {
+        this.view = view;
+        this.manager = manager;
+    }
+
+    public void run(){
+        connectToDb();
+    }
+
+    private void connectToDb() {
+        view.write("Привет - Hi, user");
+        view.write("Write base name and password in format: database|userName|password ");
         while (true) {
-            String string = viev.read();
+            String string = view.read();
             String[] data = string.split("[|]");
             String databaseName = data[0];
             String userName = data[1];
@@ -29,13 +37,14 @@ public class MainController {
                 if (e.getCause() != null) {
                     message += " " + e.getCause().getMessage();
                 }
-                viev.write("No connect!!! Details: ");
-                viev.write(e.getMessage() + message);
-                viev.write("Please try again.");
+                view.write("No connect!!! Details: ");
+                view.write(e.getMessage() + message);
+                view.write("Please try again.");
             }
         }
-        viev.write("Ok! Connect successful.");
+        view.write("Ok! Connect successful.");
     }
 
 
 }
+// 2- 1:40
