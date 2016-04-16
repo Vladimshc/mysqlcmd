@@ -3,6 +3,7 @@ package ua.com.juja.mysqlcmd.controller;
 import ua.com.juja.mysqlcmd.controller.command.Command;
 import ua.com.juja.mysqlcmd.controller.command.Exit;
 import ua.com.juja.mysqlcmd.controller.command.Help;
+import ua.com.juja.mysqlcmd.controller.command.List;
 import ua.com.juja.mysqlcmd.model.DataSet;
 import ua.com.juja.mysqlcmd.model.DatabaseManager;
 import ua.com.juja.mysqlcmd.view.View;
@@ -21,7 +22,7 @@ public class MainController {
     public MainController(View view, DatabaseManager manager) {
         this.view = view;
         this.manager = manager;
-        this.commands = new Command[] {new Exit(view), new Help(view), };
+        this.commands = new Command[] {new Exit(view), new Help(view), new List(manager, view)};
     }
 
     public void run(){
@@ -31,8 +32,8 @@ public class MainController {
             view.write("Wright command( or help)");
             String command = view.read();
 
-            if (command.equals("list")) {
-                doList();
+            if (commands[2].canProcess(command)) {
+                commands[2].process(command);
             } else if (commands[1].canProcess(command)) {
                 commands[1].process(command);
             } else if (commands[0].canProcess(command)) {
@@ -75,12 +76,6 @@ public class MainController {
         view.write("--------------");
         view.write(result);
         view.write("--------------");
-    }
-
-    private void doList() {
-        String[] tableNemes = manager.getTableNames();
-        String message = Arrays.toString(tableNemes);
-        view.write(message);
     }
 
     private void connectToDb() {
