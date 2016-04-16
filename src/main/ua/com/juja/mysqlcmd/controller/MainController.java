@@ -2,6 +2,7 @@ package ua.com.juja.mysqlcmd.controller;
 
 import ua.com.juja.mysqlcmd.controller.command.Command;
 import ua.com.juja.mysqlcmd.controller.command.Exit;
+import ua.com.juja.mysqlcmd.controller.command.Help;
 import ua.com.juja.mysqlcmd.model.DataSet;
 import ua.com.juja.mysqlcmd.model.DatabaseManager;
 import ua.com.juja.mysqlcmd.view.View;
@@ -20,7 +21,7 @@ public class MainController {
     public MainController(View view, DatabaseManager manager) {
         this.view = view;
         this.manager = manager;
-        this.commands = new Command[] {new Exit(view)};
+        this.commands = new Command[] {new Exit(view), new Help(view), };
     }
 
     public void run(){
@@ -32,8 +33,8 @@ public class MainController {
 
             if (command.equals("list")) {
                 doList();
-            } else if (command.equals("help")) {
-                doHelp();
+            } else if (commands[1].canProcess(command)) {
+                commands[1].process(command);
             } else if (commands[0].canProcess(command)) {
                 commands[0].process(command);
             } else if (command.startsWith("find|")) {
@@ -74,19 +75,6 @@ public class MainController {
         view.write("--------------");
         view.write(result);
         view.write("--------------");
-    }
-
-    private void doHelp() {
-        view.write("Command for wright:");
-        view.write("\t list " +
-                "\n\t\t - for print list of oll tables on base there we connected");
-        view.write("\t help " +
-                "\n\t\t - for print help list on screen ");
-        view.write("\t exit " +
-                "\n\t\t - for exit from program ");
-        view.write("\t find|tableName " +
-                "\n\t\t - for print the contents of the table 'tableName' ");
-
     }
 
     private void doList() {
