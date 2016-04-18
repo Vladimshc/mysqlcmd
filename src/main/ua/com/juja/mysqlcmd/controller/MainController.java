@@ -29,6 +29,9 @@ public class MainController {
         view.write("Write base name and password in format: connect|database|userName|password ");
         while(true) {
             String input = view.read();
+            if (input == null) { //null if close application
+                new Exit(view).process(input);
+            }
             for (Command command : commands) {
                 if (command.canProcess(input)) {
                     command.process(input);

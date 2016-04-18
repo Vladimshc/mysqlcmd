@@ -1,6 +1,5 @@
 package ua.com.juja.mysqlcmd.controller.command;
 
-import ua.com.juja.mysqlcmd.controller.command.Command;
 import ua.com.juja.mysqlcmd.model.DatabaseManager;
 import ua.com.juja.mysqlcmd.view.View;
 
@@ -8,6 +7,7 @@ import ua.com.juja.mysqlcmd.view.View;
  * Created by Wallee on 18.04.2016.
  */
 public class Connect implements Command {
+    private static String COMMAND_DAMPLE = "connect|mysqlcmd|postgres|12345";
     private DatabaseManager manager;
     private View view;
 
@@ -26,8 +26,9 @@ public class Connect implements Command {
     public void process(String command) {
         try {
             String[] data = command.split("[|]");
-            if (data.length != 4) {
-                throw new IllegalArgumentException("Missing parameters '|', need 4 but wright: " + data.length + " ");
+            if (data.length != count()) {
+                throw new IllegalArgumentException(String.format("Missing parameters '|', " +
+                        "need %s but wright: %s", count(), data.length));
             }
             String databaseName = data[1];
             String userName = data[2];
@@ -37,6 +38,10 @@ public class Connect implements Command {
         } catch (Exception e) {
             printError(e);
         }
+    }
+
+    public int count() {
+        return COMMAND_DAMPLE.split("[|]").length;
     }
 
     private void printError(Exception e) {
