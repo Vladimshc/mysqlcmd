@@ -15,7 +15,8 @@ public class Main {
         MainController controller = new MainController(view, manager);
 
         controller.run();
-//        mysqlcmd|postgres|12345
+//        connect|mysqlcmd|postgres|12345
+//        connect|DBforTest|postgres|12345
 
     }
 }

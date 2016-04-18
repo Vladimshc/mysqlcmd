@@ -20,6 +20,10 @@ public class Help implements Command {
     @Override
     public void process(String command) {
         view.write("Command for wright:");
+
+        view.write("\t connect|databaseName|userName|password" +
+                "\n\t\t - for get connection to database");
+
         view.write("\t list " +
                 "\n\t\t - for print list of oll tables on base there we connected");
         view.write("\t help " +
