@@ -34,6 +34,16 @@ public class IntegrationTest {
         in.reset();
     }
 
+    public String getData() {
+        try {
+            String result = new String(out.toByteArray(), "UTF-8");
+            out.reset();
+            return result;
+        } catch (UnsupportedEncodingException e) {
+            return  e.getMessage();
+        }
+    }
+
     @Test
     public void testHelp() {
         //given
@@ -52,7 +62,13 @@ public class IntegrationTest {
                 "\t\t- for get connection to database\r\n" +
                 "\r\n" +
                 "\tlist\r\n" +
-                "\t\t- for print list of oll tables on base there we connected\r\n" +
+                "\t\t- for print list of all tables on base there we connected\r\n" +
+                "\r\n" +
+                "\tclear|tableName\r\n" +
+                "\t\t- for cleaning all tables values\r\n" +
+                "\r\n" +
+                "\tcreate|tableName|colum1|value1|colum2|value2|...|columN|valueN\r\n" +
+                "\t\t- to create a record in the table\r\n" +
                 "\r\n" +
                 "\thelp\r\n" +
                 "\t\t- for print help list on screen\r\n" +
@@ -176,6 +192,7 @@ public class IntegrationTest {
     public void testFindAfterConnect() {
         //given
         in.add("connect|mysqlcmd|postgres|12345");
+        in.add("clear|user");
         in.add("find|user");
         in.add("exit");
 
@@ -186,6 +203,8 @@ public class IntegrationTest {
         assertEquals("Привет!!! Hi, user!!!\r\n" +
                 "Write base name and password in format: connect|database|userName|password\r\n" +
                 "Ok! Connect successful.\r\n" +
+                "Wright command (or help)\r\n" +
+                "Table user was cleaning successful!!!\r\n" +
                 "Wright command (or help)\r\n" +
                 "--------------\r\n" +
                 "|name|password|id|\r\n" +
@@ -220,14 +239,55 @@ public class IntegrationTest {
                 "Bye\r\n", getData());
     }
 
-    public String getData() {
-        try {
-            String result = new String(out.toByteArray(), "UTF-8");
-            out.reset();
-            return result;
-        } catch (UnsupportedEncodingException e) {
-            return  e.getMessage();
-        }
+    @Test
+    public void testConnectWithError() {
+        //given
+        in.add("connect|mysqlcmd|");
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "No connect!!! Details: \r\n" +
+                "Missing parameters '|', need 4 but wright: 2Missing parameters '|', need 4 but wright: 2\r\n" +
+                "Please try again.\r\n" +
+                "Wright command (or help)\r\n" +
+                "Bye\r\n", getData());
+    }
+
+    @Test
+    public void testFindAfterConnect_withData() {
+        //given
+        in.add("connect|mysqlcmd|postgres|12345");
+        in.add("clear|user");
+        in.add("create|user|id|13|name|Vasya|password|88888");
+        in.add("create|user|id|14|name|Vasilisa|password|77777");
+        in.add("find|user");
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "Ok! Connect successful.\r\n" +
+                "Wright command (or help)\r\n" +
+                "Table user was cleaning successful!!!\r\n" +
+                "Wright command (or help)\r\n" +
+                "Record {nemes:[id, name, password], values:[13, Vasya, 88888]} was created successfully in table user!!!\r\n" +
+                "Wright command (or help)\r\n" +
+                "Record {nemes:[id, name, password], values:[14, Vasilisa, 77777]} was created successfully in table user!!!\r\n" +
+                "Wright command (or help)\r\n" +
+                "--------------\r\n" +
+                "|name|password|id|\r\n" +
+                "--------------\r\n" +
+                "|Vasya|88888|13|\r\n" +
+                "|Vasilisa|77777|14|\r\n" +
+                "Wright command (or help)\r\n" +
+                "Bye\r\n", getData());
     }
 }
-//02:06
