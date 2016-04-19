@@ -25,10 +25,10 @@ public class Clear implements Command {
     public void process(String command) {
         String[] data = command.split("[|]");
         if (data.length != 2 ) {
-            throw new IllegalArgumentException("Command format 'clear|tableName', but you have: " + command);
+            throw new IllegalArgumentException(String.format("Command format 'clear|tableName', but you have: '%s'", command));
         }
         manager.clear(data[1]);
 
-        view.write(String.format("Table %s was cleaning successful!!!", data[1]));
+        view.write(String.format("Table '%s' was cleaning successful!!!", data[1]));
     }
 }

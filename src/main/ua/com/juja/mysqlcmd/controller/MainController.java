@@ -14,7 +14,7 @@ public class MainController {
 
     public MainController(View view, DatabaseManager manager) {
         this.view = view;
-        this.commands = new Command[] {
+        this.commands = new Command[]{
                 new Connect(manager, view),
                 new Help(view),
                 new Exit(view),
@@ -22,11 +22,11 @@ public class MainController {
                 new List(manager, view),
                 new Clear(manager, view),
                 new Create(manager, view),
-                new Find(manager,view),
+                new Find(manager, view),
                 new Unsupported(view)};
     }
 
-    public void run(){
+    public void run() {
         view.write("Привет!!! Hi, user!!!");
         view.write("Write base name and password in format: connect|database|userName|password");
 
@@ -40,16 +40,34 @@ public class MainController {
     public void doWork() {
         while (true) {
             String input = view.read();
-            if (input == null) { //null if close application
-                new Exit(view).process(input);
-            }
+
             for (Command command : commands) {
-                if (command.canProcess(input)) {
-                    command.process(input);
+                try {
+                    if (command.canProcess(input)) {
+                        command.process(input);
+                        break;
+                    }
+                } catch (Exception e) {
+                    if (e instanceof ExitException) {
+                        throw e;
+                    }
+                    printError(e);
                     break;
                 }
             }
             view.write("Wright command (or help)");
         }
+
     }
+
+    private void printError(Exception e) {
+        String message = e.getMessage();
+        if (e.getCause() != null) {
+            message += " " + e.getCause().getMessage();
+        }
+        view.write("No connect!!! Details: ");
+        view.write(e.getMessage() + message);
+        view.write("Please try again.");
+    }
+
 }

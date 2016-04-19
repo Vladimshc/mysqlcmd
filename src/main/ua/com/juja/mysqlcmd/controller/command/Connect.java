@@ -24,35 +24,20 @@ public class Connect implements Command {
 
     @Override
     public void process(String command) {
-        try {
-            String[] data = command.split("[|]");
-            if (data.length != count()) {
-                throw new IllegalArgumentException(String.format("Missing parameters '|', " +
-                        "need %s but wright: %s", count(), data.length));
-            }
-            String databaseName = data[1];
-            String userName = data[2];
-            String password = data[3];
-            manager.connect(databaseName, userName, password);
-            view.write("Ok! Connect successful.");
-        } catch (Exception e) {
-            printError(e);
+        String[] data = command.split("[|]");
+        if (data.length != count()) {
+            throw new IllegalArgumentException(String.format("Missing parameters '|', " +
+                    "need %s but wright: %s", count(), data.length));
         }
+        String databaseName = data[1];
+        String userName = data[2];
+        String password = data[3];
+        manager.connect(databaseName, userName, password);
+        view.write("Ok! Connect successful.");
     }
 
     public int count() {
         return COMMAND_DAMPLE.split("[|]").length;
     }
-
-    private void printError(Exception e) {
-        String message = e.getMessage();
-        if (e.getCause() != null) {
-            message += " " + e.getCause().getMessage();
-        }
-        view.write("No connect!!! Details: ");
-        view.write(e.getMessage() + message);
-        view.write("Please try again.");
-    }
-
 
 }

@@ -17,11 +17,11 @@ import static org.junit.Assert.assertEquals;
  */
 public class IntegrationTest {
 
-    private static ConfigurableInputStream in;
-    private static ByteArrayOutputStream out;
+    private ConfigurableInputStream in;
+    private ByteArrayOutputStream out;
 
-    @BeforeClass
-    public static void setup() {
+    @Before
+    public void setup() {
         out = new ByteArrayOutputStream();
         in = new ConfigurableInputStream();
 
@@ -29,10 +29,6 @@ public class IntegrationTest {
         System.setOut(new PrintStream(out));
     }
 
-    @Before
-    public void clearIn() throws IOException {
-        in.reset();
-    }
 
     public String getData() {
         try {
@@ -204,7 +200,7 @@ public class IntegrationTest {
                 "Write base name and password in format: connect|database|userName|password\r\n" +
                 "Ok! Connect successful.\r\n" +
                 "Wright command (or help)\r\n" +
-                "Table user was cleaning successful!!!\r\n" +
+                "Table 'user' was cleaning successful!!!\r\n" +
                 "Wright command (or help)\r\n" +
                 "--------------\r\n" +
                 "|name|password|id|\r\n" +
@@ -276,17 +272,68 @@ public class IntegrationTest {
                 "Write base name and password in format: connect|database|userName|password\r\n" +
                 "Ok! Connect successful.\r\n" +
                 "Wright command (or help)\r\n" +
-                "Table user was cleaning successful!!!\r\n" +
+                "Table 'user' was cleaning successful!!!\r\n" +
                 "Wright command (or help)\r\n" +
-                "Record {nemes:[id, name, password], values:[13, Vasya, 88888]} was created successfully in table user!!!\r\n" +
+                "Record '{nemes:[id, name, password], values:[13, Vasya, 88888]}' was created successfully in table 'user'!!!\r\n" +
                 "Wright command (or help)\r\n" +
-                "Record {nemes:[id, name, password], values:[14, Vasilisa, 77777]} was created successfully in table user!!!\r\n" +
+                "Record '{nemes:[id, name, password], values:[14, Vasilisa, 77777]}' was created successfully in table 'user'!!!\r\n" +
                 "Wright command (or help)\r\n" +
                 "--------------\r\n" +
                 "|name|password|id|\r\n" +
                 "--------------\r\n" +
                 "|Vasya|88888|13|\r\n" +
                 "|Vasilisa|77777|14|\r\n" +
+                "Wright command (or help)\r\n" +
+                "Bye\r\n", getData());
+    }
+
+    @Test
+    public void testClear_withError() {
+        //given
+        in.add("connect|mysqlcmd|postgres|12345");
+        in.add("clear");
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "Ok! Connect successful.\r\n" +
+                "Wright command (or help)\r\n" +
+
+                "No connect!!! Details: \r\n" +
+                "Command format 'clear|tableName', but you have: 'clear'Command format 'clear|tableName', but you have: 'clear'\r\n" +
+                "Please try again.\r\n" +
+
+                "Wright command (or help)\r\n" +
+                "Bye\r\n", getData());
+    }
+
+    @Test
+    public void testCreate_withError() {
+        //given
+        in.add("connect|mysqlcmd|postgres|12345");
+        in.add("create|user|id|1111|2222");
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "Ok! Connect successful.\r\n" +
+                "Wright command (or help)\r\n" +
+                "No connect!!! Details: \r\n" +
+                "Must be an even number of parameters in the following format: " +
+                    "'create|tableName|colum1|value1|colum2|value2|...|columN|valueN', but you have: " +
+                    "'create|user|id|1111|2222'" +
+                    "Must be an even number of parameters in the following format: " +
+                    "'create|tableName|colum1|value1|colum2|value2|...|columN|valueN', but you have: " +
+                    "'create|user|id|1111|2222'\r\n" +
+                "Please try again.\r\n" +
                 "Wright command (or help)\r\n" +
                 "Bye\r\n", getData());
     }

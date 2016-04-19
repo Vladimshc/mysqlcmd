@@ -24,10 +24,10 @@ public class Create implements Command {
 
     @Override
     public void process(String command) {
-        String[] data = command.split("[|]");
+        String[] data = command.split("\\|");
         if (data.length % 2 != 0) {
-            throw new IllegalArgumentException("Должно быть четное количество параметров в формате: " +
-                    "'create|tableName|colum1|value1|colum2|value2|...|columN|valueN' .");
+            throw new IllegalArgumentException(String.format("Must be an even number of parameters in the following format: " +
+                    "'create|tableName|colum1|value1|colum2|value2|...|columN|valueN', but you have: '%s'", command));
         }
 
         DataSet dataSet = new DataSet();
@@ -41,7 +41,7 @@ public class Create implements Command {
         }
         manager.create(tableName, dataSet);
 
-        view.write(String.format("Record %s was created successfully in table %s!!!", dataSet, tableName ));
+        view.write(String.format("Record '%s' was created successfully in table '%s'!!!", dataSet, tableName ));
 
     }
 }
