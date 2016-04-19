@@ -1,0 +1,233 @@
+package ua.com.juja.mysqlcmd.integration;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import ua.com.juja.mysqlcmd.controller.Main;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+
+import static org.junit.Assert.assertEquals;
+
+/**
+ * Created by Wallee on 18.04.2016.
+ */
+public class IntegrationTest {
+
+    private static ConfigurableInputStream in;
+    private static ByteArrayOutputStream out;
+
+    @BeforeClass
+    public static void setup() {
+        out = new ByteArrayOutputStream();
+        in = new ConfigurableInputStream();
+
+        System.setIn(in);
+        System.setOut(new PrintStream(out));
+    }
+
+    @Before
+    public void clearIn() throws IOException {
+        in.reset();
+    }
+
+    @Test
+    public void testHelp() {
+        //given
+        in.add("help");
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "Command for wright:\r\n" +
+                "\r\n" +
+                "\tconnect|databaseName|userName|password\r\n" +
+                "\t\t- for get connection to database\r\n" +
+                "\r\n" +
+                "\tlist\r\n" +
+                "\t\t- for print list of oll tables on base there we connected\r\n" +
+                "\r\n" +
+                "\thelp\r\n" +
+                "\t\t- for print help list on screen\r\n" +
+                "\r\n" +
+                "\texit\r\n" +
+                "\t\t- for exit from program\r\n" +
+                "\r\n" +
+                "\tfind|tableName\r\n" +
+                "\t\t- for print the contents of the table 'tableName'\r\n" +
+                "\r\n" +
+                "Wright command (or help)\r\n" +
+                "Bye\r\n", getData());
+    }
+
+    @Test
+    public void testExit() {
+        //given
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "Bye\r\n", getData());
+    }
+
+    @Test
+    public void testListWithoutConnect() {
+        //given
+        in.add("list");
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "You can not use the command list has not yet connect with the command: connect|databaseName|userName|password\r\n" +
+                "Wright command (or help)\r\n" +
+                "Bye\r\n", getData());
+    }
+
+    @Test
+    public void testFindWithoutConnect() {
+        //given
+        in.add("find|user");
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "You can not use the command find|user has not yet connect with the command: connect|databaseName|userName|password\r\n" +
+                "Wright command (or help)\r\n" +
+                "Bye\r\n", getData());
+    }
+
+    @Test
+    public void testUnsupportedWithoutConnect() {
+        //given
+        in.add("unsupported");
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "You can not use the command unsupported has not yet connect with the command: connect|databaseName|userName|password\r\n" +
+                "Wright command (or help)\r\n" +
+                "Bye\r\n", getData());
+    }
+
+    @Test
+    public void testUnsupportedAfterConnect() {
+        //given
+        in.add("connect|mysqlcmd|postgres|12345");
+        in.add("unsupported");
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "Ok! Connect successful.\r\n" +
+                "Wright command (or help)\r\n" +
+                "Command doesn't exist: unsupported\r\n" +
+                "Wright command (or help)\r\n" +
+                "Bye\r\n", getData());
+    }
+
+    @Test
+    public void testListAfterConnect() {
+        //given
+        in.add("connect|mysqlcmd|postgres|12345");
+        in.add("list");
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "Ok! Connect successful.\r\n" +
+                "Wright command (or help)\r\n" +
+                "[user2, user]\r\n" +
+                "Wright command (or help)\r\n" +
+                "Bye\r\n", getData());
+    }
+
+    @Test
+    public void testFindAfterConnect() {
+        //given
+        in.add("connect|mysqlcmd|postgres|12345");
+        in.add("find|user");
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "Ok! Connect successful.\r\n" +
+                "Wright command (or help)\r\n" +
+                "--------------\r\n" +
+                "|name|password|id|\r\n" +
+                "--------------\r\n" +
+                "Wright command (or help)\r\n" +
+                "Bye\r\n", getData());
+    }
+
+    @Test
+    public void testConnectAfterConnect() {
+        //given
+        in.add("connect|mysqlcmd|postgres|12345");
+        in.add("list");
+        in.add("connect|mysqlcmd|postgres|12345");
+        in.add("list");
+        in.add("exit");
+
+        //when
+        Main.main(new String[0]);
+
+        //then
+        assertEquals("Привет!!! Hi, user!!!\r\n" +
+                "Write base name and password in format: connect|database|userName|password\r\n" +
+                "Ok! Connect successful.\r\n" +
+                "Wright command (or help)\r\n" +
+                "[user2, user]\r\n" +
+                "Wright command (or help)\r\n" +
+                "Ok! Connect successful.\r\n" +
+                "Wright command (or help)\r\n" +
+                "[user2, user]\r\n" +
+                "Wright command (or help)\r\n" +
+                "Bye\r\n", getData());
+    }
+
+    public String getData() {
+        try {
+            String result = new String(out.toByteArray(), "UTF-8");
+            out.reset();
+            return result;
+        } catch (UnsupportedEncodingException e) {
+            return  e.getMessage();
+        }
+    }
+}
+//02:06

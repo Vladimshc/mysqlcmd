@@ -25,9 +25,18 @@ public class MainController {
     }
 
     public void run(){
-        view.write("Hi, user");
-        view.write("Write base name and password in format: connect|database|userName|password ");
-        while(true) {
+        view.write("Привет!!! Hi, user!!!");
+        view.write("Write base name and password in format: connect|database|userName|password");
+
+        try {
+            doWork();
+        } catch (ExitException e) {
+//            do nothing
+        }
+    }
+
+    public void doWork() {
+        while (true) {
             String input = view.read();
             if (input == null) { //null if close application
                 new Exit(view).process(input);
@@ -38,7 +47,7 @@ public class MainController {
                     break;
                 }
             }
-            view.write("Wright command( or help)");
+            view.write("Wright command (or help)");
         }
     }
 }

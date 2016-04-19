@@ -19,18 +19,18 @@ public class Help implements Command {
 
     @Override
     public void process(String command) {
-        view.write("Command for wright:");
+        view.write("Command for wright:\r\n");
 
-        view.write("\t connect|databaseName|userName|password" +
-                "\n\t\t - for get connection to database");
+        view.write("\tconnect|databaseName|userName|password\r\n"+
+                "\t\t- for get connection to database\r\n");
 
-        view.write("\t list " +
-                "\n\t\t - for print list of oll tables on base there we connected");
-        view.write("\t help " +
-                "\n\t\t - for print help list on screen ");
-        view.write("\t exit " +
-                "\n\t\t - for exit from program ");
-        view.write("\t find|tableName " +
-                "\n\t\t - for print the contents of the table 'tableName' ");
+        view.write("\tlist\r\n"+
+                "\t\t- for print list of oll tables on base there we connected\r\n");
+        view.write("\thelp\r\n"+
+                "\t\t- for print help list on screen\r\n");
+        view.write("\texit\r\n"+
+                "\t\t- for exit from program\r\n");
+        view.write("\tfind|tableName\r\n"+
+                "\t\t- for print the contents of the table 'tableName'\r\n");
     }
 }
