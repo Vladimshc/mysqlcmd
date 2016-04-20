@@ -54,14 +54,17 @@ public class FindTest {
         command.process("find|user");
 
 //        then
+        shouldPrint("[--------------, " +
+                    "|id|name|password|, " +
+                    "--------------, " +
+                    "|12|Arnold|2222222|, " +
+                    "|13|Tom|3333333|]");
+    }
+
+    public void shouldPrint(String expected) {
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(view, atLeastOnce()).write(captor.capture());
-        assertEquals(
-                "[--------------, " +
-                        "|id|name|password|, " +
-                        "--------------, " +
-                        "|12|Arnold|2222222|, " +
-                        "|13|Tom|3333333|]", captor.getAllValues().toString());
+        assertEquals(expected, captor.getAllValues().toString());
     }
 
     @Test
@@ -105,12 +108,8 @@ public class FindTest {
         command.process("find|user");
 
 //        then
-        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(view, atLeastOnce()).write(captor.capture());
-        assertEquals(
-                "[--------------, " +
-                        "|id|name|password|, " +
-                        "--------------]"
-                , captor.getAllValues().toString());
+        shouldPrint("[--------------, " +
+                    "|id|name|password|, " +
+                    "--------------]");
     }
 }
