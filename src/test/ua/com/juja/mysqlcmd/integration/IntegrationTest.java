@@ -291,7 +291,7 @@ public class IntegrationTest {
     public void testClear_withError() {
         //given
         in.add("connect|mysqlcmd|postgres|12345");
-        in.add("clear");
+        in.add("clear|");
         in.add("exit");
 
         //when
@@ -304,7 +304,7 @@ public class IntegrationTest {
                 "Wright command (or help)\r\n" +
 
                 "No connect!!! Details: \r\n" +
-                "Command format 'clear|tableName', but you have: 'clear'Command format 'clear|tableName', but you have: 'clear'\r\n" +
+                "Command format 'clear|tableName', but you have: 'clear|'Command format 'clear|tableName', but you have: 'clear|'\r\n" +
                 "Please try again.\r\n" +
 
                 "Wright command (or help)\r\n" +
