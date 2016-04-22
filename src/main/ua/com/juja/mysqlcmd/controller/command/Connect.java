@@ -27,7 +27,7 @@ public class Connect implements Command {
         String[] data = command.split("[|]");
         if (data.length != count()) {
             throw new IllegalArgumentException(String.format("Missing parameters '|', " +
-                    "need %s but wright: %s", count(), data.length));
+                    "need '%s' but wright: '%s'", count(), data.length));
         }
         String databaseName = data[1];
         String userName = data[2];

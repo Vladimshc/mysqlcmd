@@ -19,27 +19,27 @@ public class Help implements Command {
 
     @Override
     public void process(String command) {
-        view.write("Command for wright:\r\n");
+        view.write("Command for wright:");
 
-        view.write("\tconnect|databaseName|userName|password\r\n"+
-                "\t\t- for get connection to database\r\n");
+        view.write("\t'connect|databaseName|userName|password'\r\n"+
+                "\t\t- for get connection to database");
 
-        view.write("\tlist\r\n"+
-                "\t\t- for print list of all tables on base there we connected\r\n");
+        view.write("\t'list'\r\n"+
+                "\t\t- for print list of all tables on base there we connected");
 
-        view.write("\tclear|tableName\r\n"+
-                "\t\t- for cleaning all tables values\r\n"); //TODO ошибочнный ввод команды? Подтверждение ввода команды.
+        view.write("\t'clear|tableName'\r\n"+
+                "\t\t- for cleaning all tables values"); //TODO ошибочнный ввод команды? Подтверждение ввода команды.
 
-        view.write("\tcreate|tableName|colum1|value1|colum2|value2|...|columN|valueN\r\n"+
-                "\t\t- to create a record in the table\r\n");
+        view.write("\t'create|tableName|colum1|value1|colum2|value2|...|columN|valueN'\r\n"+
+                "\t\t- to create a record in the table");
 
-        view.write("\thelp\r\n"+
-                "\t\t- for print help list on screen\r\n");
+        view.write("\t'help'\r\n"+
+                "\t\t- for print help list on screen");
 
-        view.write("\texit\r\n"+
-                "\t\t- for exit from program\r\n");
+        view.write("\t'exit'\r\n"+
+                "\t\t- for exit from program");
 
-        view.write("\tfind|tableName\r\n"+
-                "\t\t- for print the contents of the table 'tableName'\r\n");
+        view.write("\t'find|tableName'\r\n"+
+                "\t\t- for print the contents of the table 'tableName'");
     }
 }

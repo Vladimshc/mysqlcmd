@@ -33,7 +33,7 @@ public class FindTest {
     @Test
     public void testPrintTableData() {
 //        given
-        when(manager.getTableColums("user"))
+        when(manager.getTableColumns("user"))
                 .thenReturn(new String[]{"id", "name", "password"});
 
         DataSet user1 = new DataSet();
@@ -97,7 +97,7 @@ public class FindTest {
     @Test
     public void testPrintEmptyTableData() {
 //        given
-        when(manager.getTableColums("user"))
+        when(manager.getTableColumns("user"))
                 .thenReturn(new String[]{"id", "name", "password"});
 
         DataSet[] data = new DataSet[0];

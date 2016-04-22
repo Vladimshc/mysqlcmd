@@ -55,7 +55,7 @@ public class MainController {
                     break;
                 }
             }
-            view.write("Wright command (or help)");
+            view.write("Wright command (or 'help')");
         }
     }
 

@@ -53,29 +53,29 @@ public class IntegrationTest {
         assertEquals("Hi, user!!!\r\n" +
                 "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Command for wright:\r\n" +
-                "\r\n" +
-                "\tconnect|databaseName|userName|password\r\n" +
+
+                "\t'connect|databaseName|userName|password'\r\n" +
                 "\t\t- for get connection to database\r\n" +
-                "\r\n" +
-                "\tlist\r\n" +
+
+                "\t'list'\r\n" +
                 "\t\t- for print list of all tables on base there we connected\r\n" +
-                "\r\n" +
-                "\tclear|tableName\r\n" +
+
+                "\t'clear|tableName'\r\n" +
                 "\t\t- for cleaning all tables values\r\n" +
-                "\r\n" +
-                "\tcreate|tableName|colum1|value1|colum2|value2|...|columN|valueN\r\n" +
+
+                "\t'create|tableName|colum1|value1|colum2|value2|...|columN|valueN'\r\n" +
                 "\t\t- to create a record in the table\r\n" +
-                "\r\n" +
-                "\thelp\r\n" +
+
+                "\t'help'\r\n" +
                 "\t\t- for print help list on screen\r\n" +
-                "\r\n" +
-                "\texit\r\n" +
+
+                "\t'exit'\r\n" +
                 "\t\t- for exit from program\r\n" +
-                "\r\n" +
-                "\tfind|tableName\r\n" +
+
+                "\t'find|tableName'\r\n" +
                 "\t\t- for print the contents of the table 'tableName'\r\n" +
-                "\r\n" +
-                "Wright command (or help)\r\n" +
+
+                "Wright command (or 'help')\r\n" +
                 "Bye\r\n", getData());
     }
 
@@ -105,8 +105,8 @@ public class IntegrationTest {
         //then
         assertEquals("Hi, user!!!\r\n" +
                 "Write base name and password in format: 'connect|database|userName|password'\r\n" +
-                "You can not use the command list has not yet connect with the command: connect|databaseName|userName|password\r\n" +
-                "Wright command (or help)\r\n" +
+                "You can not use the command 'list' has not yet connect with the command: 'connect|databaseName|userName|password'\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Bye\r\n", getData());
     }
 
@@ -122,8 +122,8 @@ public class IntegrationTest {
         //then
         assertEquals("Hi, user!!!\r\n" +
                 "Write base name and password in format: 'connect|database|userName|password'\r\n" +
-                "You can not use the command find|user has not yet connect with the command: connect|databaseName|userName|password\r\n" +
-                "Wright command (or help)\r\n" +
+                "You can not use the command 'find|user' has not yet connect with the command: 'connect|databaseName|userName|password'\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Bye\r\n", getData());
     }
 
@@ -139,8 +139,8 @@ public class IntegrationTest {
         //then
         assertEquals("Hi, user!!!\r\n" +
                 "Write base name and password in format: 'connect|database|userName|password'\r\n" +
-                "You can not use the command unsupported has not yet connect with the command: connect|databaseName|userName|password\r\n" +
-                "Wright command (or help)\r\n" +
+                "You can not use the command 'unsupported' has not yet connect with the command: 'connect|databaseName|userName|password'\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Bye\r\n", getData());
     }
 
@@ -158,9 +158,9 @@ public class IntegrationTest {
         assertEquals("Hi, user!!!\r\n" +
                 "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
-                "Wright command (or help)\r\n" +
-                "Command doesn't exist: unsupported\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
+                "Command 'unsupported' doesn't exist!!!\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Bye\r\n", getData());
     }
 
@@ -178,9 +178,9 @@ public class IntegrationTest {
         assertEquals("Hi, user!!!\r\n" +
                 "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "[user2, user]\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Bye\r\n", getData());
     }
 
@@ -199,13 +199,13 @@ public class IntegrationTest {
         assertEquals("Hi, user!!!\r\n" +
                 "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Table 'user' was cleaning successful!!!\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "--------------\r\n" +
                 "|name|password|id|\r\n" +
                 "--------------\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Bye\r\n", getData());
     }
 
@@ -225,13 +225,13 @@ public class IntegrationTest {
         assertEquals("Hi, user!!!\r\n" +
                 "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "[user2, user]\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Ok! Connect successful.\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "[user2, user]\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Bye\r\n", getData());
     }
 
@@ -248,9 +248,9 @@ public class IntegrationTest {
         assertEquals("Hi, user!!!\r\n" +
                 "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "No connect!!! Details: \r\n" +
-                "Missing parameters '|', need 4 but wright: 2\r\n" +
+                "Missing parameters '|', need '4' but wright: '2'\r\n" +
                 "Please try again.\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Bye\r\n", getData());
     }
 
@@ -271,19 +271,19 @@ public class IntegrationTest {
         assertEquals("Hi, user!!!\r\n" +
                 "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Table 'user' was cleaning successful!!!\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Record '{ names:[id, name, password], values:[13, Vasya, 88888] }' was created successfully in table 'user'!!!\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Record '{ names:[id, name, password], values:[14, Vasilisa, 77777] }' was created successfully in table 'user'!!!\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "--------------\r\n" +
                 "|name|password|id|\r\n" +
                 "--------------\r\n" +
                 "|Vasya|88888|13|\r\n" +
                 "|Vasilisa|77777|14|\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Bye\r\n", getData());
     }
 
@@ -301,13 +301,13 @@ public class IntegrationTest {
         assertEquals("Hi, user!!!\r\n" +
                 "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
 
                 "No connect!!! Details: \r\n" +
                 "Command format 'clear|tableName', but you have: 'clear|'\r\n" +
                 "Please try again.\r\n" +
 
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Bye\r\n", getData());
     }
 
@@ -325,13 +325,13 @@ public class IntegrationTest {
         assertEquals("Hi, user!!!\r\n" +
                 "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "No connect!!! Details: \r\n" +
                 "Must be an even number of parameters in the following format: " +
                     "'create|tableName|colum1|value1|colum2|value2|...|columN|valueN', but you have: " +
                     "'create|user|id|1111|2222'\r\n" +
                 "Please try again.\r\n" +
-                "Wright command (or help)\r\n" +
+                "Wright command (or 'help')\r\n" +
                 "Bye\r\n", getData());
     }
 }

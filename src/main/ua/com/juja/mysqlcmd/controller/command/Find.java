@@ -1,6 +1,5 @@
 package ua.com.juja.mysqlcmd.controller.command;
 
-import ua.com.juja.mysqlcmd.controller.command.Command;
 import ua.com.juja.mysqlcmd.model.DataSet;
 import ua.com.juja.mysqlcmd.model.DatabaseManager;
 import ua.com.juja.mysqlcmd.view.View;
@@ -27,7 +26,7 @@ public class Find implements Command {
             String[] data = command.split("[|]");
             String tableName = data[1];
             DataSet[] tableData = manager.getTableData(tableName);
-            String[] tableColums = manager.getTableColums(tableName);
+            String[] tableColums = manager.getTableColumns(tableName);
             printHeader(tableColums);
             printTable(tableData);
     }

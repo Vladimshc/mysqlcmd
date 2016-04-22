@@ -144,7 +144,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public String[] getTableColums(String tableName) {
+    public String[] getTableColumns(String tableName) {
 
         try {
             Statement stmt = connection.createStatement();

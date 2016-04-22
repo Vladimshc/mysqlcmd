@@ -78,7 +78,7 @@ public abstract class DatabaseManagerTest {
         manager.clear("user");
 
         //when
-        String[] columNames = manager.getTableColums("user");
+        String[] columNames = manager.getTableColumns("user");
 
         //thern
         assertEquals("[name, password, id]", Arrays.toString(columNames));
