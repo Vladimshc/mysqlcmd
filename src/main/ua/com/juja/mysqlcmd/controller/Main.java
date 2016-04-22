@@ -17,9 +17,5 @@ public class Main {
         controller.run();
 //        connect|mysqlcmd|postgres|12345
 //        connect|DBforTest|postgres|12345
-
     }
 }
-
-// 2-  2:14
-// 3- 0:23

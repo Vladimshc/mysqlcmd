@@ -32,7 +32,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
             return new DataSet[0];
-            }
+        }
 
     }
 
@@ -67,14 +67,14 @@ public class JDBCDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public void  connect(String database, String userName, String password) {
+    public void connect(String database, String userName, String password) {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Please add jdbc jar to project", e);
         }
         try {
-            connection =  DriverManager.getConnection(
+            connection = DriverManager.getConnection(
                     "jdbc:postgresql://localhost:5432/" + database, userName,
                     password);
         } catch (SQLException e) {
@@ -116,7 +116,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     private String getValuesFormated(DataSet input, String format) {
         String values = "";
-        for (Object value : input.getValues()){
+        for (Object value : input.getValues()) {
             values += String.format(format, value);
         }
         values = values.substring(0, values.length() - 1);
@@ -174,7 +174,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     private String getNameFormated(DataSet newValue, String format) {
         String string = "";
-        for (String name : newValue.getNames()){
+        for (String name : newValue.getNames()) {
             string += String.format(format, name);
         }
         string = string.substring(0, string.length() - 1);

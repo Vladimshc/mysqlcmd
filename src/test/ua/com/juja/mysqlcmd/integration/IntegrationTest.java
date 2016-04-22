@@ -50,8 +50,8 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Command for wright:\r\n" +
                 "\r\n" +
                 "\tconnect|databaseName|userName|password\r\n" +
@@ -88,8 +88,8 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Bye\r\n", getData());
     }
 
@@ -103,8 +103,8 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "You can not use the command list has not yet connect with the command: connect|databaseName|userName|password\r\n" +
                 "Wright command (or help)\r\n" +
                 "Bye\r\n", getData());
@@ -120,8 +120,8 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "You can not use the command find|user has not yet connect with the command: connect|databaseName|userName|password\r\n" +
                 "Wright command (or help)\r\n" +
                 "Bye\r\n", getData());
@@ -137,8 +137,8 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "You can not use the command unsupported has not yet connect with the command: connect|databaseName|userName|password\r\n" +
                 "Wright command (or help)\r\n" +
                 "Bye\r\n", getData());
@@ -155,8 +155,8 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
                 "Wright command (or help)\r\n" +
                 "Command doesn't exist: unsupported\r\n" +
@@ -175,8 +175,8 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
                 "Wright command (or help)\r\n" +
                 "[user2, user]\r\n" +
@@ -196,8 +196,8 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
                 "Wright command (or help)\r\n" +
                 "Table 'user' was cleaning successful!!!\r\n" +
@@ -222,8 +222,8 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
                 "Wright command (or help)\r\n" +
                 "[user2, user]\r\n" +
@@ -245,10 +245,10 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "No connect!!! Details: \r\n" +
-                "Missing parameters '|', need 4 but wright: 2Missing parameters '|', need 4 but wright: 2\r\n" +
+                "Missing parameters '|', need 4 but wright: 2\r\n" +
                 "Please try again.\r\n" +
                 "Wright command (or help)\r\n" +
                 "Bye\r\n", getData());
@@ -268,15 +268,15 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
                 "Wright command (or help)\r\n" +
                 "Table 'user' was cleaning successful!!!\r\n" +
                 "Wright command (or help)\r\n" +
-                "Record '{nemes:[id, name, password], values:[13, Vasya, 88888]}' was created successfully in table 'user'!!!\r\n" +
+                "Record '{ names:[id, name, password], values:[13, Vasya, 88888] }' was created successfully in table 'user'!!!\r\n" +
                 "Wright command (or help)\r\n" +
-                "Record '{nemes:[id, name, password], values:[14, Vasilisa, 77777]}' was created successfully in table 'user'!!!\r\n" +
+                "Record '{ names:[id, name, password], values:[14, Vasilisa, 77777] }' was created successfully in table 'user'!!!\r\n" +
                 "Wright command (or help)\r\n" +
                 "--------------\r\n" +
                 "|name|password|id|\r\n" +
@@ -298,13 +298,13 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
                 "Wright command (or help)\r\n" +
 
                 "No connect!!! Details: \r\n" +
-                "Command format 'clear|tableName', but you have: 'clear|'Command format 'clear|tableName', but you have: 'clear|'\r\n" +
+                "Command format 'clear|tableName', but you have: 'clear|'\r\n" +
                 "Please try again.\r\n" +
 
                 "Wright command (or help)\r\n" +
@@ -322,15 +322,12 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         //then
-        assertEquals("Привет!!! Hi, user!!!\r\n" +
-                "Write base name and password in format: connect|database|userName|password\r\n" +
+        assertEquals("Hi, user!!!\r\n" +
+                "Write base name and password in format: 'connect|database|userName|password'\r\n" +
                 "Ok! Connect successful.\r\n" +
                 "Wright command (or help)\r\n" +
                 "No connect!!! Details: \r\n" +
                 "Must be an even number of parameters in the following format: " +
-                    "'create|tableName|colum1|value1|colum2|value2|...|columN|valueN', but you have: " +
-                    "'create|user|id|1111|2222'" +
-                    "Must be an even number of parameters in the following format: " +
                     "'create|tableName|colum1|value1|colum2|value2|...|columN|valueN', but you have: " +
                     "'create|user|id|1111|2222'\r\n" +
                 "Please try again.\r\n" +

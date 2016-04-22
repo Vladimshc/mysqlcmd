@@ -7,7 +7,7 @@ import ua.com.juja.mysqlcmd.view.View;
  * Created by Wallee on 18.04.2016.
  */
 public class Connect implements Command {
-    private static String COMMAND_DAMPLE = "connect|mysqlcmd|postgres|12345";
+    private static String COMMAND_SAMPLE = "connect|mysqlcmd|postgres|12345";
     private DatabaseManager manager;
     private View view;
 
@@ -37,7 +37,7 @@ public class Connect implements Command {
     }
 
     public int count() {
-        return COMMAND_DAMPLE.split("[|]").length;
+        return COMMAND_SAMPLE.split("[|]").length;
     }
 
 }

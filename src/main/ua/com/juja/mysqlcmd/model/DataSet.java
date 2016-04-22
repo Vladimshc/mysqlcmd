@@ -7,13 +7,11 @@ import java.util.Arrays;
  */
 public class DataSet {
 
-
     static class Data {
         private String name;
         private Object value;
 
         public Data(String name, Object value) {
-
             this.name = name;
             this.value = value;
         }
@@ -75,10 +73,7 @@ public class DataSet {
 
     @Override
     public String toString() {
-        return "{" +
-                "nemes:" + Arrays.toString(getNames()) + ", " +
-                "values:" + Arrays.toString(getValues()) +
-                "}";
+        return "{ names:" + Arrays.toString(getNames()) + ", " +
+                "values:" + Arrays.toString(getValues()) + " }";
     }
-
 }

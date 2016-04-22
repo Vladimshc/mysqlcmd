@@ -27,8 +27,8 @@ public class MainController {
     }
 
     public void run() {
-        view.write("Привет!!! Hi, user!!!");
-        view.write("Write base name and password in format: connect|database|userName|password");
+        view.write("Hi, user!!!");
+        view.write("Write base name and password in format: 'connect|database|userName|password'");
 
         try {
             doWork();
@@ -57,7 +57,6 @@ public class MainController {
             }
             view.write("Wright command (or help)");
         }
-
     }
 
     private void printError(Exception e) {
@@ -66,7 +65,7 @@ public class MainController {
             message += " " + e.getCause().getMessage();
         }
         view.write("No connect!!! Details: ");
-        view.write(e.getMessage() + message);
+        view.write(message);
         view.write("Please try again.");
     }
 
