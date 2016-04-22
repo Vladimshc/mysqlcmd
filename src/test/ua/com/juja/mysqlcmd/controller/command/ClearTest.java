@@ -30,7 +30,6 @@ public class ClearTest {
 
     @Test
     public void testClearTable() {
-//        given
 //        when
         command.process("clear|user");
 
@@ -75,9 +74,7 @@ public class ClearTest {
         } catch (IllegalArgumentException e) {
             //then
             assertEquals("Command format 'clear|tableName', but you have: 'clear'", e.getMessage());
-
         }
-
     }
 
     @Test
@@ -89,8 +86,6 @@ public class ClearTest {
         } catch (IllegalArgumentException e) {
             //then
             assertEquals("Command format 'clear|tableName', but you have: 'clear|table|qwe'", e.getMessage());
-
         }
-
     }
 }
